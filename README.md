@@ -3,16 +3,16 @@
 A lightweight Python application that detects eye blinks using OpenCV and dlib, with adjustable sensitivity and alert delay settings.
 
 ## Features
-- Auto-detects the correct camera (skips non-working or virtual cameras)
+- Auto-detects the correct camera (skips non-working or (offline) virtual cameras)
 - Displays real-time EAR (Eye Aspect Ratio) values
 - Adjustable blink sensitivity and alert delay (values saved between runs)
 - Plays a warning beep if no blink is detected for too long
 - Toggleable help menu
-- Simple GUI with OpenCV
+- Simple (meaning ugly) GUI with OpenCV
 
 ## Requirements
 - Python 3.8+  
-- Required pip packages (install via `pip install -r requirements.txt`):
+- Required pip packages:
     ```sh
     pip install opencv-python numpy scipy matlibplot dlib imutils pyinstaller
     ```
@@ -42,6 +42,9 @@ This will generate `dist/blinky.exe`, which can be run without Python installed.
 
 ## Notes
 - If the camera selection takes a few seconds, it is auto-detecting the first valid camera. Virtual cameras can cause this to take longer.
+  - Note: Valid means has an image *and* a face (I'm making the assumption that you are at your computer when launching the program)
+- It will run happily in the background. If you step away (face no longer detected) it will pause the alert until you come back.
+- The help menu will show a debug output for EAR, which can help set the sensitivity appropriately.
 - The application stores slider settings in `blinkconfig.json` for convenience on subsequent runs.
 - If packaging with PyInstaller, ensure the `.dat` file is included (see command above).
 
